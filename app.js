@@ -45,7 +45,7 @@ app.get('/restaurants', (req, res) => {
 
 //新增餐廳頁面
 app.get('/restaurants/new', (req, res) => {
-  res.send('新增頁面')
+  res.render('new')
 })
 
 //顯示詳細資料
