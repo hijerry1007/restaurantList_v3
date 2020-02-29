@@ -93,16 +93,16 @@ app.get('/restaurants/:id/edit', (req, res) => {
 
 // 修改餐廳
 app.post('/restaurants/:id/edit', (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurants) => {
-    restaurants.name = req.body.name
-    restaurants.name_en = req.body.name_en
-    restaurants.category = req.body.category
-    restaurants.image = req.body.image
-    restaurants.location = req.body.location
-    restaurants.phone = req.body.phone
-    restaurants.google_map = req.body.google_map
-    restaurants.rating = req.body.rating
-    restaurants.description = req.body.description
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    restaurant.name = req.body.name
+    restaurant.name_en = req.body.name_en
+    restaurant.category = req.body.category
+    restaurant.image = req.body.image
+    restaurant.location = req.body.location
+    restaurant.phone = req.body.phone
+    restaurant.google_map = req.body.google_map
+    restaurant.rating = req.body.rating
+    restaurant.description = req.body.description
 
     restaurants.save(err => {
       if (err) return console.error(err)
@@ -114,7 +114,13 @@ app.post('/restaurants/:id/edit', (req, res) => {
 
 //刪除
 app.post('/restaurants/:id/delete', (req, res) => {
-  res.send('刪除餐廳')
+  Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+    restaurant.remove(err => {
+      if (err) return console.error(err)
+      return res.redirect('/')
+    })
+  })
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {

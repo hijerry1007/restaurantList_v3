@@ -36,6 +36,9 @@
                 {{this.rating}}
                 <i class="fas fa-star fa-xs"></i>
                 <a href="/restaurants/{{this._id}}/edit">edit</a>
+                <form action="/restaurants/{{{this._id}}}/delete" method="POST" style="display: inline;">
+                  <button type="submit">delete</button>
+                </form>
               </span>
 
             </div>
