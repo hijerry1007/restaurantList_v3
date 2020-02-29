@@ -50,7 +50,12 @@ app.get('/restaurants/new', (req, res) => {
 
 //顯示詳細資料
 app.get('/restaurants/:id', (req, res) => {
-  res.send('餐廳詳細')
+  Restaurant.findById(req.params.id)
+    .lean()
+    .exec((err, restaurants) => {
+      if (err) return console.error(err)
+      return res.render('show', { restaurant: restaurants })
+    })
 })
 
 //新增餐廳
