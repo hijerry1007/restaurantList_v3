@@ -2,10 +2,12 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
+const bodyParser = require('body-parser')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //載入db
 const mongoose = require('mongoose')
@@ -60,7 +62,23 @@ app.get('/restaurants/:id', (req, res) => {
 
 //新增餐廳
 app.post('/restaurants', (req, res) => {
-  res.send('新增餐廳')
+  console.log(req.body)
+  const restaurant = new Restaurant({
+    name: req.body.name,
+    name_en: req.body.name_en,
+    category: req.body.category,
+    image: req.body.image,
+    location: req.body.location,
+    phone: req.body.phone,
+    google_map: req.body.google_map,
+    rating: req.body.rating,
+    description: req.body.description,
+  })
+
+  restaurant.save(err => {
+    if (err) return console.error(err)
+    return res.redirect('/')
+  })
 })
 
 // 修改餐廳詳細頁面
