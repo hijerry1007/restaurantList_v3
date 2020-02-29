@@ -25,6 +25,9 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
+//require db model
+const Restaurant = require('./models/restaurant')
+
 
 
 app.get('/', (req, res) => {
