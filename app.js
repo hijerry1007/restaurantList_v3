@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
-const restaurantList = require('./models/seeds/restaurant.json')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -31,12 +30,17 @@ const Restaurant = require('./models/restaurant')
 
 //首頁 
 app.get('/', (req, res) => {
-  res.send('這是首頁')
+  res.redirect('/restaurants')
 })
 
 //列出所有餐廳清單
 app.get('/restaurants', (req, res) => {
-  res.send('所有清單')
+  Restaurant.find()
+    .lean()
+    .exec((err, restaurants) => {
+      if (err) return console.error(err)
+      return res.render('index', { restaurant: restaurants })
+    })
 })
 
 //新增餐廳頁面
