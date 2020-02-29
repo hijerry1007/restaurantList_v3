@@ -29,9 +29,44 @@ db.once('open', () => {
 const Restaurant = require('./models/restaurant')
 
 
-
+//首頁 
 app.get('/', (req, res) => {
-  res.render('index', { restaurant: restaurantList.results })
+  res.send('這是首頁')
+})
+
+//列出所有餐廳清單
+app.get('/restaurants', (req, res) => {
+  res.send('所有清單')
+})
+
+//新增餐廳頁面
+app.get('/restaurants/new', (req, res) => {
+  res.send('新增頁面')
+})
+
+//顯示詳細資料
+app.get('/restaurants/:id', (req, res) => {
+  res.send('餐廳詳細')
+})
+
+//新增餐廳
+app.post('/restaurants', (req, res) => {
+  res.send('新增餐廳')
+})
+
+// 修改餐廳詳細頁面
+app.get('/restaurants/:id/edit', (req, res) => {
+  res.send('修改餐廳頁面')
+})
+
+// 修改餐廳
+app.post('/restaurants/:id/edit', (req, res) => {
+  res.send('修改餐廳')
+})
+
+//刪除
+app.post('/restaurants/:id/delete', (req, res) => {
+  res.send('刪除餐廳')
 })
 
 app.get('/restaurants/:restaurant_id', (req, res) => {
