@@ -8,6 +8,25 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 
+//載入db
+const mongoose = require('mongoose')
+//connect to db
+mongoose.connect('mongodb://localhost/restaurant', {
+  useNewUrlParser: true, useUnifiedTopology: true
+})
+//get db info
+const db = mongoose.connection
+
+db.on('error', () => {
+  console.log('mongodb error')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
+
+
+
 app.get('/', (req, res) => {
   res.render('index', { restaurant: restaurantList.results })
 })
