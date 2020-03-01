@@ -41,6 +41,7 @@ app.get('/restaurants', (req, res) => {
     .lean()
     .exec((err, restaurants) => {
       if (err) return console.error(err)
+      console.log(restaurants)
       return res.render('index', { restaurant: restaurants })
     })
 })
@@ -104,7 +105,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
     restaurant.rating = req.body.rating
     restaurant.description = req.body.description
 
-    restaurants.save(err => {
+    restaurant.save(err => {
       if (err) return console.error(err)
       return res.redirect(`/restaurants/${req.params.id}`)
     })

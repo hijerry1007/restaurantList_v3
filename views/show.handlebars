@@ -1,11 +1,13 @@
 <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
+<a class="btn btn-outline-info rounded-circle l12 mb-3" href="/restaurants/{{restaurant._id}}/edit">edit</a>
+
+<form action="/restaurants/{{{this._id}}}/delete" method="POST" style="display: inline;">
+  <button type="submit" class="btn btn-outline-info  rounded-circle mb-3"
+    onclick="return confirm(`確定要刪除?`)">delete</button>
+</form>
 <div class="container">
-  <a href="/restaurants/{{restaurant._id}}/edit">edit</a>
-  <form action="/restaurants/{{{this._id}}}/delete" method="POST" style="display: inline;">
-    <button type="submit">delete</button>
-  </form>
   <div class="row">
-    <div class="col-12 col-md-10 mx-auto">
+    <div class="show col-12 col-md-10 mx-auto">
 
       <p class="mb-1">
         <span class="text-secondary">
@@ -17,7 +19,7 @@
 
       <p class="mb-1">
         <span class="text-secondary">
-          <i class="fas fa-utensils pr-2"></i>
+          <i class="far fa-thumbs-up pr-1"></i>
           評價：
         </span>
         {{restaurant.rating}} 顆星
@@ -45,9 +47,10 @@
       <p class="mb-5">
         {{restaurant.description}}
       </p>
-
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
     </div>
   </div>
+
+
 </div>
