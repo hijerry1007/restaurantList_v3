@@ -38,10 +38,11 @@
                 <a class="btn btn-outline-info btn-sm l7 rounded-circle" href="/restaurants/{{this._id}}/edit"
                   role="button">edit
                 </a>
-                <form action="/restaurants/{{{this._id}}}/delete" method="POST" style="display: inline;">
+                <form action="/restaurants/{{this._id}}/delete" method="POST" style="display: inline;">
                   <button type="submit" class="btn btn-outline-info btn-sm rounded-circle"
                     onclick="return confirm(`確定要刪除?`)">delete</button>
                 </form>
+
               </span>
 
             </div>

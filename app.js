@@ -41,7 +41,6 @@ app.get('/restaurants', (req, res) => {
     .lean()
     .exec((err, restaurants) => {
       if (err) return console.error(err)
-      console.log(restaurants)
       return res.render('index', { restaurant: restaurants })
     })
 })
@@ -63,7 +62,7 @@ app.get('/restaurants/:id', (req, res) => {
 
 //新增餐廳
 app.post('/restaurants', (req, res) => {
-  console.log(req.body)
+
   const restaurant = new Restaurant({
     name: req.body.name,
     name_en: req.body.name_en,
@@ -84,6 +83,7 @@ app.post('/restaurants', (req, res) => {
 
 // 修改餐廳詳細頁面
 app.get('/restaurants/:id/edit', (req, res) => {
+
   Restaurant.findById(req.params.id)
     .lean()
     .exec((err, restaurants) => {
@@ -95,6 +95,8 @@ app.get('/restaurants/:id/edit', (req, res) => {
 // 修改餐廳
 app.post('/restaurants/:id/edit', (req, res) => {
   Restaurant.findById(req.params.id, (err, restaurant) => {
+    if (err) return console.error(err)
+
     restaurant.name = req.body.name
     restaurant.name_en = req.body.name_en
     restaurant.category = req.body.category

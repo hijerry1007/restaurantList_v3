@@ -1,7 +1,7 @@
 <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
 <a class="btn btn-outline-info rounded-circle l12 mb-3" href="/restaurants/{{restaurant._id}}/edit">edit</a>
 
-<form action="/restaurants/{{{this._id}}}/delete" method="POST" style="display: inline;">
+<form action="/restaurants/{{restaurant._id}}/delete" method="POST" style="display: inline;">
   <button type="submit" class="btn btn-outline-info  rounded-circle mb-3"
     onclick="return confirm(`確定要刪除?`)">delete</button>
 </form>
