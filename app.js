@@ -38,6 +38,7 @@ app.get('/', (req, res) => {
 //列出所有餐廳清單
 app.get('/restaurants', (req, res) => {
   Restaurant.find()
+    .sort({ name: 'asc' })
     .lean()
     .exec((err, restaurants) => {
       if (err) return console.error(err)
