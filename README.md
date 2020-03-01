@@ -15,7 +15,7 @@
 
 ## 安裝
 
-1. 打開你的Termianl，複製此專案至本機電腦 http://github.com/hijerry1007/restaurantList.git
+1. 打開你的Termianl，複製此專案至本機電腦 https://github.com/hijerry1007/restaurantList_v3.git
 2. 開啟終端機，進入存放此專案的資料夾restaurant
 3. 安裝npm在Terminal輸入npm install指令
 4. 安裝nodemon套件(express/express-handblebars/body-parser/mongoose) 接著再 Termianl輸入 npm run dev指令
