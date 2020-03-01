@@ -40,6 +40,10 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  done: {                             // 「完成狀態」
+    type: Boolean,
+    default: false               // 預設完成狀態為 false
   }
 })
 

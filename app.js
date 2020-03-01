@@ -106,7 +106,12 @@ app.post('/restaurants/:id/edit', (req, res) => {
     restaurant.google_map = req.body.google_map
     restaurant.rating = req.body.rating
     restaurant.description = req.body.description
-
+    if (req.body.done === 'on') {
+      restaurant.done = true
+    }
+    else {
+      restaurant.done = false
+    }
     restaurant.save(err => {
       if (err) return console.error(err)
       return res.redirect(`/restaurants/${req.params.id}`)
@@ -126,19 +131,21 @@ app.post('/restaurants/:id/delete', (req, res) => {
   })
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-  res.render('show', { restaurant: restaurant })
-})
 
 // search function
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  const restaurant = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+  Restaurant.find((err, restaurants) => {
+    if (err) return console.error(err)
+    const searchList = restaurants.filter(restaurant => {
+      restaurant.name.toLowerCase().includes(keyword.toLowerCase())
+      console.log(searchList)
+    })
+    return res.render('index', { restaurant: restaurants, keyword: keyword })
+
   })
-  res.render('index', { restaurant: restaurant, keyword: keyword })
+
 })
 
 app.listen(port, () => {
