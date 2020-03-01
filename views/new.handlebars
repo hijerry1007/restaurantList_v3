@@ -1,28 +1,35 @@
 <!-- ./views/new.handlebars -->
-<form action="/restaurants" method="POST" class="mt-4 ml-4">
-
-  <div class="w20"><label for="name" class="f2">餐廳名稱</label>
+<form action="/restaurants" method="POST" class="mt-4 ml-4 text-secondary">
+  {{#if error}}
+  <p class="w4 mb-1 f2" style="color: red;">{{{error}}}</p>
+  {{/if}}
+  <div class="w20"><label for="name" class="f2"> <i class="fas fa-home"></i> 餐廳名稱</label>
     <input type="text" class="f3" name="name"></div>
 
-  <div class="w20"><label for="name_en" class="f2">餐廳英文名稱</label>
+  <div class="w20"><label for="name_en" class="f2"><i class="fas fa-home"></i> 餐廳英文名稱</label>
     <input type="text" class="f3" name="name_en">
   </div>
   <div class="w20">
-    <label for="category" class="f2">分類</label>
+    <label for="category" class="f2"> <i class="fas fa-utensils"></i> 分類</label>
     <input type="text" class="f2" name="category">
   </div>
-  <div class="w20"><label for="image" class="f2">照片連結上傳</label>
+  <div class="w20"><label for="image" class="f2"><i class="far fa-images"></i> 照片連結上傳</label>
     <input type="text" class="f12" name="image"></div>
-  <div class="w20"><label for="location" class="f2">地址</label>
+  <div class="w20"><label for="location" class="f2"><i class="fas fa-map-marker-alt"></i> 地址</label>
     <input type="text" class="f12" name="location">
   </div>
-  <div class="w20"> <label for="phone" class="f2">電話</label>
+  <div class="w20"> <label for="phone" class="f2"> <i class="fas fa-mobile pr-1"></i> 電話</label>
     <input type=" text" class="f3" name="phone"></div>
-  <div class="w20"><label for="google_map" class="f2">GoogleMap網址</label>
+  <div class="w20"><label for="google_map" class="f2"> <i class="fas fa-map-marker-alt"></i> GoogleMap網址</label>
     <input type="text" class="f12" name="google_map"></div>
-  <div class="w20"><label for="rating" class="f2">評價(1-5顆星)</label>
+  <div class="w20"><label for="rating" class="f2"><i class="far fa-thumbs-up"></i> 評價(1-5顆星)</label>
     <input type="text" class="f2" style="width:30px; height: 25px; text-align:center" name="rating"></div>
-  <div class="w20"><label for="description" class="f2">介紹</label>
+  <div class="w20"><label for="description" class="f2"><i class="far fa-sticky-note"></i> 介紹</label>
     <input type="text" class="f15" name="description"></div>
-  <button class="btn btn-outline-info rounded-circle" type="submit" onclick="return confirm(`確定要新增?`)">Create</button>
+  <div class="w20"><label for="done" class="f2">Visisted</label>
+    <input type="checkbox" class="f2" style="width:45px; height: 25px; margin-left: -6px" name="done" </div>
+    <div class="w20"><button class="mt-2 btn btn-outline-info rounded-circle" type="submit"
+        onclick="return confirm(`確定要新增?`)">Create</button></div>
+
+
 </form>
