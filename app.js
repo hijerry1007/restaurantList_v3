@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
+
 //載入db
 const mongoose = require('mongoose')
 //connect to db
@@ -29,25 +30,6 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-//require db model
-const Restaurant = require('./models/restaurant')
-
-
-// search function
-
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  Restaurant.find((err, restaurants) => {
-    if (err) return console.error(err)
-    const searchList = restaurants.filter(restaurant => {
-      restaurant.name.toLowerCase().includes(keyword.toLowerCase())
-      console.log(searchList)
-    })
-    return res.render('index', { restaurant: restaurants, keyword: keyword })
-
-  })
-
-})
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
