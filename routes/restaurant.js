@@ -32,10 +32,15 @@ router.get('/:id', (req, res) => {
 //新增餐廳
 router.post('/', (req, res) => {
 
-  if (req.body.name === '' || req.body.name_en === '' || req.body.category === '' || req.body.image === '' || req.body.location === '' || req.body.phone === '' || req.body.google_map === '' || req.body.rating === '' || req.body.description === '') {
-    let error = `所有格子都要輸入喔!`
+  let rating = Number(req.body.rating).toFixed(1)
+  const blank = Object.values(req.body).filter((value) => value === '').length
+  if (blank > 0) {
+    let error = `所有項目均必填!`
     return res.render('new', { error: error })
-
+  }
+  else if (rating < 0 || rating > 5) {
+    let error = `評價請輸入1-5顆星`
+    return res.render('new', { error: error })
   }
   else {
     let checkdone
@@ -45,6 +50,7 @@ router.post('/', (req, res) => {
     else {
       checkdone = false
     }
+    // const { name, name_en, category, image, location, phone, google_map, rating, description}如果這邊要checkdone的值 解構賦值不知道怎麼做
     const restaurant = new Restaurant({
       name: req.body.name,
       name_en: req.body.name_en,
