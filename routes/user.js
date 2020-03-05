@@ -19,7 +19,35 @@ router.get('/register', (req, res) => {
 
 // 註冊檢查
 router.post('/register', (req, res) => {
-  res.send('register')
+  const { name, email, password, password2 } = req.body
+  User.findOne({ email: email }).then(user => {
+    if (user) {
+      // email exist, can't send out
+      console.log('User already exists')
+      res.render('register', {                // 使用者已經註冊過
+        name,
+        email,
+        password,
+        password2
+      })
+
+    }
+    else {
+      // email doesn't exist, save and return to home page
+      const newUser = new User({
+        name,
+        email,
+        password
+      })
+
+      newUser
+        .save()
+        .then(user => {
+          res.redirect('/')
+        })
+        .catch(err => console.log(err))
+    }
+  })
 })
 
 // 登出
