@@ -2,6 +2,49 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
 
+// sort
+router.get('/sort', (req, res) => {
+  let sortTitle_1
+  let sortTitle_2
+  let sortTitle_3
+  let sortTitle_4
+  let sortTitle_5
+  let sortKeyword = ''
+  let sortValue
+  if (req.query.sort === 'a-z') {
+
+    sortTitle_1 = true
+    sortKeyword = 'name'
+    sortValue = 1
+  } else if (req.query.sort === 'z-a') {
+    sortTitle_2 = true
+    sortKeyword = 'name'
+    sortValue = -1
+  } else if (req.query.sort === 'ratingHTL') {
+    sortTitle_3 = true
+    sortKeyword = 'rating'
+    sortValue = -1
+  } else if (req.query.sort === 'ratingLTH') {
+    sortTitle_4 = true
+    sortKeyword = 'rating'
+    sortValue = 1
+  } else if (req.query.sort === 'category') {
+    sortTitle_5 = true
+    sortKeyword = 'category'
+    sortValue = -1
+  }
+
+  // [] 使用變數的時候使用
+  // .sort({ [sortKeyword]: sortValue }) //[sortKeyword] 代表的是 sortKeyword 裡面的值
+  Restaurant.find()
+    .collation({ locale: 'en_US' }) // 設定英文語系排序
+    .sort({ [sortKeyword]: sortValue })
+    .lean()
+    .exec((err, restaurants) => {
+      if (err) return console.error(err)
+      return res.render('index', { restaurant: restaurants, sortTitle_1, sortTitle_2, sortTitle_3, sortTitle_4, sortTitle_5 })
+    })
+})
 
 //列出所有餐廳清單
 router.get('/', (req, res) => {
@@ -33,9 +76,10 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
 
   let rating = Number(req.body.rating).toFixed(1)
+
   const blank = Object.values(req.body).filter((value) => value === '').length
   if (blank > 0) {
-    let error = `所有項目均必填!`
+    let error = `請填入所有空格!`
     return res.render('new', { error: error })
   }
   else if (rating < 0 || rating > 5) {
