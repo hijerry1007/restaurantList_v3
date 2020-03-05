@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user') //載入user model
-
+const passport = require('passport')
 // 登入頁面
 router.get('/login', (req, res) => {
   res.render('login')
@@ -9,7 +9,11 @@ router.get('/login', (req, res) => {
 
 // 登入檢查
 router.post('/login', (req, res) => {
-  res.send('login')
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/users/login'
+  })(req, res, next)
+
 })
 
 // 註冊頁面

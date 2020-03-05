@@ -5,6 +5,8 @@ const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const session = require('express-session')
+const passport = require('passport')
+require('./config/passport')(passport)
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
@@ -14,6 +16,7 @@ app.use(methodOverride('_method'))
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
 app.use('/users', require('./routes/user'))
+
 
 //載入db
 const mongoose = require('mongoose')
@@ -37,6 +40,13 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
+
+app.use(passport.initialize())
+app.use(passport.session())
+app.use((req, res, next) => {
+  res.locals.user = req.user
+  next()
+})
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
