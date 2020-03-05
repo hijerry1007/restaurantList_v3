@@ -12,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
+app.use('users', requir('./routes/user'))
 
 //載入db
 const mongoose = require('mongoose')
