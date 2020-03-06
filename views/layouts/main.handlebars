@@ -25,9 +25,16 @@
             width="30" height="30" class="d-inline-block align-top" alt="好。吃">
           我的餐廳清單
         </a>
-        <a href="/restaurants/new" class="navbar-brand"><i class="fas fa-layer-group"></i> 新增餐廳
+        {{#if isAuthenticated}}
+        <a href="/restaurants/new" class="l13 btn btn-outline-primary"><i class="fas fa-layer-group"></i>
+          新增餐廳
         </a>
+        <a href="/users/logout" class="btn btn-outline-primary">Logout</a>
+        {{else}}
+        <a href="/users/login" class="btn btn-outline-primary">Login</a>
+        {{/if}}
       </div>
+
     </nav>
 
     <div class="banner"></div>

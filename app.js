@@ -43,7 +43,10 @@ app.use(passport.session())
 require('./config/passport')(passport)
 
 app.use((req, res, next) => {
+
   res.locals.user = req.user
+  //辨識使用者是否登入 => view 使用
+  res.locals.isAuthenticated = req.isAuthenticated()
   next()
 })
 
