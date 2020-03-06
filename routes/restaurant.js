@@ -47,16 +47,6 @@ router.get('/sort', authenticated, (req, res) => {
     })
 })
 
-//列出所有餐廳清單
-router.get('/', authenticated, (req, res) => {
-  Restaurant.find()
-    .sort({ name: 'asc' })
-    .lean()
-    .exec((err, restaurants) => {
-      if (err) return console.error(err)
-      return res.render('index', { restaurant: restaurants })
-    })
-})
 
 //新增餐廳頁面
 router.get('/new', authenticated, (req, res) => {
@@ -65,7 +55,7 @@ router.get('/new', authenticated, (req, res) => {
 
 //顯示詳細資料
 router.get('/:id', authenticated, (req, res) => {
-  Restaurant.findById(req.params.id)
+  Restaurant.findOne({ _id: req.params.id, userId: req.user._id })
     .lean()
     .exec((err, restaurants) => {
       if (err) return console.error(err)
@@ -107,6 +97,7 @@ router.post('/', authenticated, (req, res) => {
       rating: req.body.rating,
       description: req.body.description,
       done: checkdone,
+      userId: req.user._id
     })
 
     restaurant.save(err => {
@@ -120,7 +111,7 @@ router.post('/', authenticated, (req, res) => {
 // 修改餐廳詳細頁面
 router.get('/:id/edit', authenticated, (req, res) => {
 
-  Restaurant.findById(req.params.id)
+  Restaurant.findOne({ _id: req.params.id, userId: req.user._id })
     .lean()
     .exec((err, restaurants) => {
       if (err) return console.error(err)
@@ -130,7 +121,7 @@ router.get('/:id/edit', authenticated, (req, res) => {
 
 // 修改餐廳
 router.put('/:id', authenticated, (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
+  Restaurant.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
 
     restaurant.name = req.body.name
@@ -158,7 +149,7 @@ router.put('/:id', authenticated, (req, res) => {
 
 //刪除
 router.delete('/:id/delete', authenticated, (req, res) => {
-  Restaurant.findById(req.params.id, (err, restaurant) => {
+  Restaurant.findOne({ _id: req.params.id, userId: req.user._id }, (err, restaurant) => {
     if (err) return console.error(err)
     restaurant.remove(err => {
       if (err) return console.error(err)

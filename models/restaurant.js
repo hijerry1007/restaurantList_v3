@@ -44,7 +44,15 @@ const restaurantSchema = new Schema({
   done: {                             // 「完成狀態」
     type: Boolean,
     default: false               // 預設完成狀態為 false
+  },
+  //建立與user的關聯
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    index: true,
+    required: true
   }
+
 })
 
 module.exports = mongoose.model('Restaurant', restaurantSchema)

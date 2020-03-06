@@ -19,7 +19,7 @@ app.use(methodOverride('_method'))
 const mongoose = require('mongoose')
 //connect to db
 mongoose.connect('mongodb://localhost/restaurant', {
-  useNewUrlParser: true, useUnifiedTopology: true
+  useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true
 })
 //get db info
 const db = mongoose.connection

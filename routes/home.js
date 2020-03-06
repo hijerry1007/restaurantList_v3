@@ -8,7 +8,7 @@ const { authenticated } = require('../config/auth')
 
 //首頁
 router.get('/', authenticated, (req, res) => {
-  Restaurant.find()
+  Restaurant.find({ userId: req.user._id }) //只會找出使用者ID的資料
     .sort({ name: 'asc' })
     .lean()
     .exec((err, restaurants) => {
