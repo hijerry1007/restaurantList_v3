@@ -2,8 +2,12 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../models/restaurant')
 
+//載入  auth 中 的 middleware的 authenticated方法
+
+const { authenticated } = require('../config/auth')
+
 //首頁
-router.get('/', (req, res) => {
+router.get('/', authenticated, (req, res) => {
   Restaurant.find()
     .sort({ name: 'asc' })
     .lean()
@@ -15,7 +19,7 @@ router.get('/', (req, res) => {
 
 // search function
 
-router.get('/search', (req, res) => {
+router.get('/search', authenticated, (req, res) => {
   const keyword = req.query.keyword
   const regexp = new RegExp(keyword, "i")
   Restaurant.find({ $or: [{ name: { $regex: regexp } }, { category: { $regex: regexp } }] })
