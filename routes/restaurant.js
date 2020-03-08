@@ -37,8 +37,7 @@ router.get('/sort', authenticated, (req, res) => {
 
   // [] 使用變數的時候使用
   // .sort({ [sortKeyword]: sortValue }) //[sortKeyword] 代表的是 sortKeyword 裡面的值
-  Restaurant.find()
-    .collation({ locale: 'en_US' }) // 設定英文語系排序
+  Restaurant.find({ userId: req.user._id })
     .sort({ [sortKeyword]: sortValue })
     .lean()
     .exec((err, restaurants) => {
