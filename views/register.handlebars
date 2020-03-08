@@ -1,33 +1,45 @@
 <!-- views/register.handlebars -->
+<nav class="navbar navbar-dark bg-dark navRegister">
+  <a class="col-12 navbar-brand nav-title" href="#">
+    <h1 class="mb-3 navRegister">
+      Register
+    </h1>
+  </a>
+</nav>
 
 <div class="row mt-5">
   <div class="col-md-6 m-auto">
     <div class="card card-body">
-      <h1 class="text-center mb-3">
-        Register
-      </h1>
       {{> messages}}
       <form action="/users/register" method="POST">
         <div class="form-group">
-          <label for="name">Name</label>
+          <label for="name">
+            <h5>Name</h5>
+          </label>
           <input type="name" id="name" name="name" class="form-control" placeholder="Enter Name" value="{{{name}}}" />
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">
+            <h5>Email</h5>
+          </label>
           <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email"
             value="{{{email}}}" />
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">
+            <h5>Password</h5>
+          </label>
           <input type="password" id="password" name="password" class="form-control" placeholder="Create Password"
             value="{{{password}}}" />
         </div>
         <div class="form-group">
-          <label for="password2">Confirm Password</label>
+          <label for="password2">
+            <h5>Confirm Password</h5>
+          </label>
           <input type="password" id="password2" name="password2" class="form-control" placeholder="Confirm Password"
             value="{{{password2}}}" />
         </div>
-        <button type="submit" class="btn btn-primary btn-block">
+        <button type="submit" class="btn btn-outline-primary">
           Register
         </button>
       </form>

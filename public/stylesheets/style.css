@@ -10,6 +10,14 @@ header {
   color: #226089;
 }
 
+.navMain{
+  color: black;
+}
+.navRegister {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .banner {
   position: relative;
   z-index: -1;

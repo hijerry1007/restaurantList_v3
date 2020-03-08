@@ -1,49 +1,46 @@
-<nav class="navbar navbar-dark bg-dark">
-  <span class="circle ml-3"></span>
-  <span class="circle ml-3"></span>
-  <span class="circle ml-3"></span>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <a class="navbar-brand nav-title" href="#">Account Login</a>
-      </div>
-    </div>
-  </div>
-  </div>
+<nav class="navbar navbar-dark bg-dark navRegister">
+  <a class="col-12 navbar-brand nav-title" href="#">
+    <h1 class="mb-3 navRegister">
+      Account Login
+    </h1>
+  </a>
 </nav>
 
 <div class="container mt-5">
-  {{> messages}}
   <div class="row">
-    <h1>Account Login</h1>
+    <div class="col-md-6 m-auto">{{> messages}}</div>
   </div>
-  {{!-- {{#if errorMsg}}
-  <div class="=row mt-1 mb-1">
-    <p style="color: red; text-align:center">{{errorMsg}}</p>
-  </div>
-  {{/if}} --}}
   {{!-- form --}}
-  <div class="row">
-    <form method="POST" action="/users/login">
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input type="email" class="form-control" style=" width: 350px; height:60px;" name="email" id="email"
-          placeholder="Email" aria-describedby="emailHelp">
+  <div class="row ">
+    <div class="col-md-6 m-auto">
+      <form method="POST" action="/users/login">
+        <div class="form-group">
+          <label for="email">
+            <h5>Email address</h5>
+          </label>
+          <input type="email" class="form-control" style=" width: 350px; height:60px;" name="email" id="email"
+            placeholder="Email" aria-describedby="emailHelp">
 
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" class="form-control" style=" width: 350px; height:60px;" name="password" id="password"
-          placeholder="Password">
-      </div>
-      <button type="submit" class="btn btn-outline-dark">Sing in</button>
-      <a href="/auth/facebook" class="btn btn-outline-dark">Facebook Login</a>
-    </form>
+        </div>
+        <div class="form-group">
+          <label for="password">
+            <h5>Password</h5>
+          </label>
+          <input type="password" class="form-control" style=" width: 350px; height:60px;" name="password" id="password"
+            placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Sing in</button>
+        <a href="/auth/facebook" class="btn btn-outline-primary">Facebook Login</a>
+      </form>
+    </div>
   </div>
   <div class="row">
-    <p class="mt-2">
-      No Account? <a href="/users/register">Register</a>
-    </p>
+    <div class="col-md-6 m-auto">
+      <p class="mt-2">
+        No Account? <a href="/users/register">Register</a>
+      </p>
+    </div>
+
   </div>
 
 </div>

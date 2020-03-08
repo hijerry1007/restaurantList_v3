@@ -10,11 +10,28 @@ router.get('/login', (req, res) => {
 
 // 登入檢查
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/users/login'
-  })(req, res, next)
+  const { email, password } = req.body
+  let errors = [];
+  if (email === '') {
+    errors.push({ message: '請輸入電子郵件' })
+  };
 
+  if (password === '') {
+    errors.push({ message: '請輸入密碼' })
+  };
+
+  if (errors.length > 0) {
+    res.render('login', {
+      errors,
+      email,
+      password
+    })
+  } else {
+    passport.authenticate('local', {
+      successRedirect: '/',
+      failureRedirect: '/users/login'
+    })(req, res, next)
+  }
 })
 
 // 註冊頁面
