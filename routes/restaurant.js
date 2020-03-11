@@ -69,12 +69,14 @@ router.post('/', authenticated, (req, res) => {
 
   const blank = Object.values(req.body).filter((value) => value === '').length
   if (blank > 0) {
+    const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
     let error = `請填入所有空格!`
-    return res.render('new', { error: error })
+    return res.render('new', { error, name, name_en, category, image, location, phone, google_map, rating, description })
   }
   else if (rating < 0 || rating > 5) {
+    const { name, name_en, category, image, location, phone, google_map, rating, description } = req.body
     let error = `評價請輸入1-5顆星`
-    return res.render('new', { error: error })
+    return res.render('new', { error, name, name_en, category, image, location, phone, google_map, rating, description })
   }
   else {
     let checkdone
