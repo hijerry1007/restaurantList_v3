@@ -5,44 +5,34 @@ const Restaurant = require('../models/restaurant')
 const { authenticated } = require('../config/auth')
 // sort
 router.get('/sort', authenticated, (req, res) => {
-  let sortTitle_1
-  let sortTitle_2
-  let sortTitle_3
-  let sortTitle_4
-  let sortTitle_5
-  let sortKeyword = ''
-  let sortValue
-  if (req.query.sort === 'a-z') {
+  let sortTitle
+  const sort = {
+    title: [],
+    keyword: '',
+    value: '',
+  }
+  sort.title = req.query.sort
 
-    sortTitle_1 = true
-    sortKeyword = 'name'
-    sortValue = 1
-  } else if (req.query.sort === 'z-a') {
-    sortTitle_2 = true
-    sortKeyword = 'name'
-    sortValue = -1
-  } else if (req.query.sort === 'ratingHTL') {
-    sortTitle_3 = true
-    sortKeyword = 'rating'
-    sortValue = -1
-  } else if (req.query.sort === 'ratingLTH') {
-    sortTitle_4 = true
-    sortKeyword = 'rating'
-    sortValue = 1
-  } else if (req.query.sort === 'category') {
-    sortTitle_5 = true
-    sortKeyword = 'category'
-    sortValue = -1
+  if (sort.title === 'a-z') {
+    sort.value = 1
+  } else if (sort.title === 'z-a') {
+    sort.value = -1
+  } else if (sort.title === 'ratingHTL') {
+    sort.value = -1
+  } else if (sort.title === 'ratingLTH') {
+    sort.value = 1
+  } else if (sort.title === 'category') {
+    sort.value = -1
   }
 
   // [] 使用變數的時候使用
   // .sort({ [sortKeyword]: sortValue }) //[sortKeyword] 代表的是 sortKeyword 裡面的值
   Restaurant.find({ userId: req.user._id })
-    .sort({ [sortKeyword]: sortValue })
+    .sort({ [sort.title]: sort.value })
     .lean()
     .exec((err, restaurants) => {
       if (err) return console.error(err)
-      return res.render('index', { restaurant: restaurants, sortTitle_1, sortTitle_2, sortTitle_3, sortTitle_4, sortTitle_5 })
+      return res.render('index', { restaurant: restaurants, sort })
     })
 })
 

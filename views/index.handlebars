@@ -23,11 +23,16 @@
       Sort
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item {{#if sortTitle_1}}active{{/if}}" href="/restaurants/sort?sort=a-z">A-Z</a>
-      <a class="dropdown-item {{#if sortTitle_2}}active{{/if}}" href="/restaurants/sort?sort=z-a">Z-A</a>
-      <a class="dropdown-item {{#if sortTitle_3}}active{{/if}}" href="/restaurants/sort?sort=ratingHTL">評價高至低</a>
-      <a class="dropdown-item {{#if sortTitle_4}}active{{/if}}" href="/restaurants/sort?sort=ratingLTH">評價低至高</a>
-      <a class="dropdown-item {{#if sortTitle_5}}active{{/if}}" href="/restaurants/sort?sort=category">餐廳分類</a>
+      <a class="dropdown-item {{#if_equal sort.title 'a-z'}}active{{/if_equal}}"
+        href="/restaurants/sort?sort=a-z">A-Z</a>
+      <a class="dropdown-item {{#if_equal sort.title  'z-a'}}active{{/if_equal}}"
+        href="/restaurants/sort?sort=z-a">Z-A</a>
+      <a class="dropdown-item {{#if_equal sort.title 'ratingHTL'}}active{{/if_equal}}"
+        href="/restaurants/sort?sort=ratingHTL">評價高至低</a>
+      <a class="dropdown-item {{#if_equal sort.title 'ratingLTH'}}active{{/if_equal}}"
+        href="/restaurants/sort?sort=ratingLTH">評價低至高</a>
+      <a class="dropdown-item {{#if_equal sort.title 'category'}}active{{/if_equal}}"
+        href="/restaurants/sort?sort=category">餐廳分類</a>
     </div>
   </div>
 </div>

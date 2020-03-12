@@ -11,6 +11,7 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash')
+const handlebars = require("handlebars")
 
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -60,6 +61,12 @@ app.use((req, res, next) => {
   next()
 })
 
+handlebars.registerHelper('if_equal', function (sortTitle, input, options) {
+  if (sortTitle === input) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 
 app.use('/', require('./routes/home'))
 app.use('/restaurants', require('./routes/restaurant'))
